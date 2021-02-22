@@ -20,12 +20,45 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a th:href="@{/search}">Search</a></li>
-                    <li><a th:href="@{/list}">List</a></li>
+                    <li th:each="action : ${actions}">
+                        <a th:href="@{'/' + ${action.key}}" th:text="${action.value}"></a>
+                    </li>
+<!--                    <li><a th:href="@{/search}">Search</a></li>-->
+<!--                    <li><a th:href="@{/list}">List</a></li>-->
                 </ul>
             </div>
         </div>
     </div>
 
+    <table th:fragment="display-table" th:each="job : ${jobs}" class="job-listing">
+        <tr>
+            <th>ID</th>
+            <td th:text="${job.id}"></td>
+        </tr>
+        <tr>
+            <th>name</th>
+            <td th:text="${job.name}"></td>
+        </tr>
+        <tr>
+            <th>employer</th>
+            <td><a th:href="@{/list/jobs(column=employer, value=${job.employer})}"
+                   th:text="${job.employer}"></a></td>
+        </tr>
+        <tr>
+            <th>location</th>
+            <td><a th:href="@{/list/jobs(column=location, value=${job.location})}"
+                   th:text="${job.location}"></a></td>
+        </tr>
+        <tr>
+            <th>position type</th>
+            <td><a th:href="@{/list/jobs(column=positionType, value=${job.positionType})}"
+                   th:text="${job.positionType}"></a></td>
+        </tr>
+        <tr>
+            <th>core competency</th>
+            <td><a th:href="@{/list/jobs(column=coreCompetency, value=${job.coreCompetency})}"
+                   th:text="${job.coreCompetency}"></a></td>
+        </tr>
+    </table>
 </body>
 </html>

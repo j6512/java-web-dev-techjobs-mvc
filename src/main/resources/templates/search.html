@@ -15,12 +15,22 @@
 
         <p>
             <span th:each="column : ${columns}">
+                <th:block th:unless="${searchType}">
                 <input
                         type="radio"
                         name="searchType"
                         th:id="${column.key}"
                         th:value="${column.key}"
                         th:checked="${column.key == 'all'}"/>
+                </th:block>
+                <th:block th:if="${searchType}">
+                    <input
+                            type="radio"
+                            name="searchType"
+                            th:id="${column.key}"
+                            th:value="${column.key}"
+                            th:checked="${column.key == searchType}"/>
+                </th:block>
                 <label th:for="${column.key}" th:text="${column.value}"></label>
             </span>
 
@@ -37,33 +47,35 @@
     <hr />
 
     <!-- TODO #4 - Loop over the search results to display all job fields. -->
-    <table th:each="job : ${jobs}" class="job-listing">
-        <tr>
-            <th>ID</th>
-            <td th:text="${job.id}"></td>
-        </tr>
-        <tr>
-            <th>name</th>
-            <td th:text="${job.name}"></td>
-        </tr>
-        <tr>
-            <th>employer</th>
-            <td th:text="${job.employer}"></td>
-        </tr>
-        <tr>
-            <th>location</th>
-            <td th:text="${job.location}"></td>
-        </tr>
-        <tr>
-            <th>position type</th>
-            <td th:text="${job.positionType}"></td>
-        </tr>
-        <tr>
-            <th>skill</th>
-            <td th:text="${job.coreCompetency}"></td>
-        </tr>
+    <table th:replace="fragments :: display-table"></table>
+<!--    <table th:each="job : ${jobs}" class="job-listing">-->
+<!--        <tr>-->
+<!--            <th>ID</th>-->
+<!--            <td th:text="${job.id}"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th>name</th>-->
+<!--            <td th:text="${job.name}"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th>employer</th>-->
+<!--            <td th:text="${job.employer}"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th>location</th>-->
+<!--            <td th:text="${job.location}"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th>position type</th>-->
+<!--            <td th:text="${job.positionType}"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <th>skill</th>-->
+<!--            <td th:text="${job.coreCompetency}"></td>-->
+<!--        </tr>-->
 
-        <br>
+<!--        <br>-->
+<!--    </table>-->
 
 </div>
 
